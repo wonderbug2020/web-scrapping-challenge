@@ -1,6 +1,6 @@
 #Import libraries
 from flask import Flask, render_template
-from flask_pymongo import flask_pyMongo
+from flask_pymongo import PyMongo
 import scrape_mars
 
 #Flask Setup
@@ -13,8 +13,9 @@ mongo = PyMongo(app)
 #Create the home page
 @app.route("/")
 def index():
-    mars = mongo.db.mars.find_one()
-    return render_template("index.html", mars=mars)
+    #mars = mongo.db.mars.find_one()
+    return render_template("index.html")#, mars=mars)
+    #return("hello")
 
 #Create a site that collects all the scrapped stuff
 @app.route("/scrape")
