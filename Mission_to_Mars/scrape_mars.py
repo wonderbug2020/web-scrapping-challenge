@@ -96,8 +96,10 @@ def get_table():
     #Now just to give the columns names and set the index
     mar_fact.columns=["Description", "Value"]
     mar_fact.set_index("Description", inplace=True)
+    mar_fact_html = mar_fact.to_html()
+    mar_fact_final = mar_fact_html.replace('<tr style="text-align: right;">','<tr style="text-align: left;">')
 
-    return(mar_fact)
+    return(mar_fact_final)
 
 
 #################################################################################
@@ -136,8 +138,10 @@ def scrape():
     mars_weather = get_weather()
     df_table = get_table()
     hemi_urls = get_image_url()
-    py_dict = {"Story":[story_title,story_para],
-               "Feature Image":feature_image_url,
+    py_dict = {"Headline":story_title,
+               "Paragraph":story_para,
+               "Feature_Image":feature_image_url,
                "Weather":mars_weather,
-               "Mars Facts":df_table,
-               "Mars Hemispheres":hemi_url}
+               "Mars_Facts":df_table,
+               "Mars_Hemispheres":hemi_urls}
+    return(py_dict)
